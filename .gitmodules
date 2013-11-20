@@ -13,3 +13,6 @@
 [submodule "wp-plugins/better-wordpress-google-xml-sitemaps"]
 	path = wp-plugins/better-wordpress-google-xml-sitemaps
 	url = https://github.com/OddOneOut/Better-WordPress-Google-XML-Sitemaps
+[submodule "wp-plugins/sexybookmarks"]
+	path = wp-plugins/sexybookmarks
+	url = https://github.com/wp-plugins/sexybookmarks
