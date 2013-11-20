@@ -10,3 +10,6 @@
 [submodule "wp-plugins/all-in-one-seo-pack"]
 	path = wp-plugins/all-in-one-seo-pack
 	url = https://github.com/wp-plugins/all-in-one-seo-pack
+[submodule "wp-plugins/better-wordpress-google-xml-sitemaps"]
+	path = wp-plugins/better-wordpress-google-xml-sitemaps
+	url = https://github.com/OddOneOut/Better-WordPress-Google-XML-Sitemaps
