@@ -7,3 +7,6 @@
 [submodule "wp-plugins/disqus-comment-system"]
 	path = wp-plugins/disqus-comment-system
 	url = https://github.com/crowdfavorite-mirrors/wp-disqus-comment-system
+[submodule "wp-plugins/all-in-one-seo-pack"]
+	path = wp-plugins/all-in-one-seo-pack
+	url = https://github.com/wp-plugins/all-in-one-seo-pack
