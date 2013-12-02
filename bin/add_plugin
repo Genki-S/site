@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Usage: add_plugin url
+
+url=$1
+zip_file=${url##*/}
+plugin_name=${zip_file%%.*}
+wget $url
+unzip $zip_file
+rm $zip_file
+mv $plugin_name wp-plugins/${plugin_name}

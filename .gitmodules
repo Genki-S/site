@@ -7,12 +7,9 @@
 [submodule "wp-plugins/disqus-comment-system"]
 	path = wp-plugins/disqus-comment-system
 	url = https://github.com/crowdfavorite-mirrors/wp-disqus-comment-system
-[submodule "wp-plugins/all-in-one-seo-pack"]
-	path = wp-plugins/all-in-one-seo-pack
-	url = https://github.com/wp-plugins/all-in-one-seo-pack
-[submodule "wp-plugins/better-wordpress-google-xml-sitemaps"]
-	path = wp-plugins/better-wordpress-google-xml-sitemaps
-	url = https://github.com/OddOneOut/Better-WordPress-Google-XML-Sitemaps
 [submodule "wp-plugins/sexybookmarks"]
 	path = wp-plugins/sexybookmarks
 	url = https://github.com/wp-plugins/sexybookmarks
+[submodule "wp-plugins/jetpack"]
+	path = wp-plugins/jetpack
+	url = https://github.com/wp-plugins/jetpack
