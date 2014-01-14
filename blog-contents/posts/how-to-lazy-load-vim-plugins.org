@@ -1,0 +1,49 @@
+#+BLOG: my-blog
+#+POSTID: 17
+#+DATE: [2014-01-14 Tue 17:31]
+#+TITLE: How to Lazy Load Vim Plugins
+#+TAGS: vim
+
+* What You Get
+- Vim with faster startup time
+* What is NeoBundle
+[[https://github.com/Shougo/neobundle.vim][NeoBundle]] is a plugin manager for vim. It makes installing/updating/cleaning vim plugins easy.
+
+There is a similar plugin named [[https://github.com/gmarik/vundle][Vundle]] (actually, NeoBundle was originally a fork of it). NeoBundle has many advantages over Vundle, and one of those is lazy loading, which is essential to keep vim's startup time bearable when using many plugins.
+
+NeoBundle is written by Shougo, a Japanese programmer. So, while there are many Japanese articles about NeoBundle, I could not find any article in English. That's why I decided to write this article. Note that the document of NeoBundle is well written in English. So you can always see =:h neobundle= to get detailed help.
+
+#+BEGIN_ASIDE
+Shougo is one of the most famous Japanese vim user, who is really passionate about vim. His plugins are high in quality, and so well maintained that Japanese vim users admire his software by calling it "ShougoWare". I regard him as one of my vim heroes, along with (of course) tpope, kana, etc.
+#+END_ASIDE
+* Basic usage
+I recommend you to see the quick start on [[https://github.com/Shougo/neobundle.vim][NeoBundle README]]. Apart from required snippets you have to copy & paste, using it is quite simple. After setup, if you want to install a plugin from github repository, just write =NeoBundle "github-user/repository"​= in your .vimrc and issue =:NeoBundleInstall=, and you have it.
+* How to Lazy Load
+If you use =NeoBundle "user/repo"​= in your .vimrc, the plugin is loaded at the startup. There are 2 ways to tell NeoBundle not to load plugins at the startup.
+
+#+BEGIN_HTML
+<code data-gist-id='8415526'></code>
+#+END_HTML
+
+I prefer latter because it is much easier to toggle lazy option (you can just delete 'lazy' line).
+
+You can issue "NeoBundleSource repo" to source the plugin manually. Or you can add triggers to source it. There are many triggers you can use (see =:h *neobundle-options-autoload*=). I think these are particularly useful:
+- filetypes :: when filetype is set to one of the specified types
+- commands :: when one of the specified commands is issued
+- mappings :: when one of the specified mappings is triggered
+
+Example:
+
+
+#+BEGIN_HTML
+<code data-gist-id='8415549'></code>
+#+END_HTML
+
+In this case, the plugin is loaded when one of these events are occurred:
+- filetype is set to 'vim' or 'elisp'
+- =:Command= is issued
+- =<Plug>(plugin_mapping)= is triggered
+
+* What's next?
+You might want to manage vim plugins via yaml file [[https://github.com/Genki-S/dotfiles/blob/master/vimfiles/vim/bundles.yml][like me]]. Because it's beautiful and easy to change options than editing vimscript (I hate newline & backslash syntax).
+I am planning to write about it in my future post.
