@@ -8,4 +8,5 @@ plugin_name=${zip_file%%.*}
 wget $url
 unzip $zip_file
 rm $zip_file
-mv $plugin_name wp-plugins/${plugin_name}
+rm -rf WordPress/wp-content/plugins/${plugin_name}
+mv $plugin_name WordPress/wp-content/plugins/${plugin_name}
