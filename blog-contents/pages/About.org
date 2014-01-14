@@ -6,3 +6,6 @@
 I am a student majoring in computer science at Waseda University in Japan. I am passionate about improving my productivity. My silver bullets for productivity are vim, zsh, tmux, healthy eating, regular exercise, quality sleep, etc. I love being obsessed with these things.
 * About this site
 In this site, I mostly write about tips to improve productivity. I can have fun investing 10 hours to earn 5 hours. My mission is to make my investments available in 1 hour for you.
+* Contact
+- Email :: genki.sugimoto.jp [at] gmail.com
+- twitter :: [[https://twitter.com/GenkiSugimoto][@GenkiSugimoto]]
