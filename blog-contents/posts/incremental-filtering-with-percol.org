@@ -1,0 +1,40 @@
+#+BLOG: my-blog
+#+POSTID: 28
+#+DATE: [2014-01-19 Sun 17:30]
+#+TITLE: Making `| grep` Obsolete: Incremental Filtering with Percol
+#+TAGS: shell
+#+PERMALINK: incremental-filtering-with-percol
+
+* What you get
+- Faster, easier workflow of selecting lines from stdin
+- Unlocked potential of making your shell life easier
+
+* What is percol?
+[[https://github.com/mooz/percol][Percol]] gets input from a file or stdin, let you filter lines incrementally, and output selected lines to stdout. For vim users, it's [[https://github.com/Shougo/unite.vim][unite.vim]] for stdin. For emacs users, it's [[http://emacs-helm.github.io/helm/][Emacs Helm]] (previously anything.el) for stdin. For zsh users, it's [[https://github.com/zsh-users/zaw][zaw]] for stdin. For shell lovers, it's incremental =| grep=. For others, watch this:
+
+#+BEGIN_HTML
+<script type="text/javascript" src="http://asciinema.org/a/7258.js" id="asciicast-7258" async></script>
+#+END_HTML
+
+What's great about percol is that it interacts with stdio, so it's easy to combine percol with other programs to accomplish many tasks.
+
+* Setup
+You can install percol using pip: =pip install percol=.
+
+I recommend you to take a look at [[https://github.com/mooz/percol#configuration][percol README configuration section]]. But if you are busy, just make =~/.percol.d/rc.py= and write this to get nice keymaps:
+
+#+BEGIN_HTML
+<code data-gist-id='8501936'></code>
+#+END_HTML
+
+* Examples
+If you are using zsh, this zsh history search is the must:
+
+#+BEGIN_HTML
+<code data-gist-id='8501974'></code>
+#+END_HTML
+
+* What's next?
+Sky is the limit! You can make many tasks easier. When you use =| grep= in interactive shell, maybe you can replace it with percol.
+
+Here are some more examples to spark your creativity: you can instantly checkout on your desired git branch (~alias gbs="git branch | percol | xargs git checkout"​~), or you can use percol to [[https://github.com/Genki-S/dotfiles/blob/master/zshfiles/rcfiles/percol.zsh#L11-L30][select clipboard history]] (you need Mac and [[http://www.clipmenu.com/][ClipMenu]]).
