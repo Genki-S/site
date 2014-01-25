@@ -1,0 +1,49 @@
+#+BLOG: my-blog
+#+POSTID: 35
+#+DATE: [2014-01-26 Sun 05:48]
+#+TITLE: How to Force Yourself to Keep Clean Git Working Tree
+#+TAGS: git
+#+PERMALINK: keep-clean-git-working-tree
+
+* What you get
+- No more pushing without adding necessary files
+- Cleaner =git status= output :)
+* Background
+I am really lazy and my git repositories tend to be messy.
+I sometimes write useful scripts but I don't commit it nor remove it from project directories.
+So, my =git status= tends to output a lot of "untracked" files.
+
+One day, I pushed commits without adding necessary files.
+This caused some time loss on my team.
+I hate wasting time, regardless of mine or of others.
+So I determined to keep my git repositories clean to prevent this from happening again.
+* Using git pre-push hook
+I wrote a git pre-push hook which prevents me from pushing when my repository is dirty.
+This way, I cannot push commits if any untracked files exist, and I will not likely to push flawed commits again.
+You can use this too by saving the script below as =.git/hooks/pre-push= in your repositories (make sure you make it executable).
+
+#+BEGIN_HTML
+<code data-gist-id='8623216'></code>
+#+END_HTML
+
+* Oasis named "trash"
+However, I still sometimes want to keep temporary files in my repository, but don't want to commit those.
+To manage this situation, I found =.git/info/exclude= file useful.
+It is =.gitignore= you don't have to commit.
+So, you can ignore files only in your repositories.
+
+I made a directory named "stash" in my repository and ran =echo 'stash' >> .git/info/exclude=.
+Now I can keep my crappy scripts in the "stash" directory without being committed nor being listed as "untracked".
+
+* What's Next?
+If you think you will use =.git/info/exclude= a lot, following script might be useful.
+After saving it as "git-exclude" and making it executable, you can issue =git exclude 'file'​= to add files to =.git/info/exclude=.
+
+#+BEGIN_HTML
+<code data-gist-id='8623241'></code>
+#+END_HTML
+
+You might want to manage git hooks the nicer way if you want to use multiple hooks.
+I found [[https://github.com/icefox/git-hooks][icefox/git-hooks]] and it seems promising.
+The great thing about it is that it allows me to have "User hooks" in =~/.git_hooks=.
+So, now I can manage my git hooks effortlessly in my dotfiles repository.
