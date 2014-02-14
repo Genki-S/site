@@ -1,0 +1,81 @@
+#+BLOG: my-blog
+#+POSTID: 41
+#+DATE: [2014-02-06 Thu 15:54]
+#+TITLE: Manage Vim Plugins the Beautiful Way using Yaml
+#+TAGS: vim
+#+PERMALINK: manage-vim-plugins-via-yaml
+
+* What you get
+- [[https://github.com/Genki-S/dotfiles/blob/master/vimfiles/vim/bundles.yml][Beautiful list]] of vim plugins
+* Prerequisite
+- Using [[https://github.com/Shougo/neobundle.vim][NeoBundle]] (I think it works with [[https://github.com/gmarik/vundle][Vundle]] as well)
+* Vimscript is not so beautiful
+When you are using NeoBundle and passing many options for plugins, your vimrc might look like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8834329'></code>
+#+END_HTML
+
+I'm not a fan of vimscript's newline & backslash syntax, which you use to break a line in the middle of a command.
+I'm not sure how I should indent it (my autoindent setting is not so smart at this problem...).
+And things get crazy when you want to join a multiline command into one line.
+So, I don't want to use multiline commands where I am sure I change a lot, and vim plugin list and options are one of those.
+* Meet yaml
+I found it best to use yaml to manage my vim plugins and options because NeoBundle command takes repository name as the first argument and options dictionary as the second argument.
+You can build yaml file with the following structure:
+
+#+BEGIN_HTML
+<code data-gist-id='8834752'></code>
+#+END_HTML
+
+And then, you can parse it and store into a variable.
+You can use any parser, I use one from ruby like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8834793'></code>
+#+END_HTML
+
+It does following (note that "hash" is for ruby and "dictionary" is for vim):
+
+- Invoke ruby
+- Load yaml file (which turns into a hash)
+- Generate string representation of the hash
+- Modify the string into the form of vim dictionary's string representation
+- Let vim (from within ruby) evaluate the string and store the dictionary into vim's local variable
+
+#+BEGIN_ASIDE
+You need to compile vim with ruby support to use ruby from within vim.
+You can check if your vim has ruby support by the command =vim --version | grep ruby=.
+If it outputs =-ruby=, then you don't have ruby support.
+If it outputs =+ruby=, then you have it.
+
+I know some minimalist does not like my method because not all vim have ruby support.
+But I'm happy with it because I'm not likely to use vim without ruby support.
+#+END_ASIDE
+
+* Loop plugins and let NeoBundle manage it
+Now that we have our plugin list in a variable, we can loop it and invoke =NeoBundle= command like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8835962'></code>
+#+END_HTML
+
+I love the beauty of writing =NeoBundle= command only once.
+* What's Next?
+We are now able to manage vim plugins quite easily by modifing yaml file.
+If you install vim plugins frequently, I recommend you to use [[https://github.com/AndrewRadev/switch.vim][switch.vim]] to make installing process lightning fast.
+It allows you to predefine substitution patterns and invoke it when the cursor is one of the predefined patterns (i.e. it's predefined =:s= command).
+
+Put the following to your vimrc:
+
+#+BEGIN_HTML
+<code data-gist-id='8839254'></code>
+#+END_HTML
+
+Using this setting, you can copy and paste a vim plugin's github url and substitute it to proper yaml format instantly.
+
+Now there are no obstacles to try out many plugins.
+However, be careful not to overload your vim with too many plugins (like me), it makes your vim slow.
+You can cope with this problem with NeoBundle's lazy loading feature, which I covered [[http://genkisugimoto.com/blog/how-to-lazy-load-vim-plugins/][here]].
+
+By the way, switch.vim is so awesome that I recommend you to use it for many purposes other than this as well.

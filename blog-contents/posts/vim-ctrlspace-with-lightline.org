@@ -1,0 +1,68 @@
+#+BLOG: my-blog
+#+POSTID: 44
+#+DATE: [2014-02-09 Sun 09:18]
+#+TITLE: How to Use vim-ctrlspace with lightline.vim
+#+TAGS: vim
+#+PERMALINK: vim-ctrlspace-with-lightline
+
+* What you get
+:LOGBOOK:
+CLOCK: [2014-02-09 Sun 09:14]--[2014-02-09 Sun 09:39] =>  0:25
+CLOCK: [2014-02-09 Sun 07:53]--[2014-02-09 Sun 08:18] =>  0:25
+:END:
+- Proper vim-ctrlspace statusline with lightline.vim
+- Clean way to use =autocmd=
+* Manage your workspace with vim-ctrlspace
+A while ago, I found [[https://github.com/szw/vim-ctrlspace][vim-ctrlspace]], the vim workspace manager, and fell in love instantly after watching [[https://www.youtube.com/watchv%3D09l92uwKupI][this demo video]].
+I usually use [[https://github.com/Shougo/unite.vim][unite.vim]] to search and open files, but managing workspace seemed to be a great productivity boost when dealing with complicated projects.
+
+When I tried it first, I thought vim-ctrlspace was a little sluggish and I had not developed the habit of using it.
+However, when I used it yesterday (while competing in [[http://www.staticshowdown.com/][Static Showdown]]), I did not feel any sluggishness and it helped me a lot.
+One pitfall is that vim-ctrlspace uses statusline, so if you are using a statusline plugin (like [[https://github.com/Lokaltog/vim-powerline][vim-powerline]], [[https://github.com/bling/vim-airline][vim-airline]] or [[https://github.com/itchyny/lightline.vim][lightline.vim]]), you have to tweak your =vimrc= a little to see proper vim-ctrlspace statusline.
+
+I like lightline.vim because it is well designed and, as you guessed, light.
+I managed to use vim-ctrlspace along with lightline.vim, and I will write how.
+* Disable lightline.vim in vim-ctrlspace window
+vim-ctrlspace provides APIs to use in lightline.vim.
+I remember I tried that, but I didn't quite get it work.
+I think disabling lightline.vim in vim-ctrlspace window is more straightforward and sustainable approach.
+
+This is possible because, as I noted above, lightline.vim is well designed.
+It uses =autocmd= to update statusline like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8891811'></code>
+#+END_HTML
+
+And it uses =augroup= well, so we can easily override those =autocmd=.
+
+#+BEGIN_ASIDE
+=augroup= is used to open a "scope" of =autocmd=.
+And =autocmd!= is used to delete existing =autocmd= "in the current scope".
+So, you can delete all =autocmd= in =LightLine= group by issuing =autocmd!= in =LightLine= scope like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8891894'></code>
+#+END_HTML
+
+#+END_ASIDE
+
+Now let's disable lightline.vim only in vim-ctrlspace window.
+It is as simple as writing a filter function which execute normal lightline.vim operation except for vim-ctrlspace window.
+Because vim-ctrlspace window sets its =bufname= as =​"__CS__"​=, we can stop lightline.vim execution when =bufname('%')= equals to =​"__CS__"​=.
+The function looks like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8891969'></code>
+#+END_HTML
+
+And finally, we can define our self =autocmd= to call this filter function like this:
+
+#+BEGIN_HTML
+<code data-gist-id='8892016'></code>
+#+END_HTML
+* What's Next?
+Now you can use vim-ctrlspce with it's proper statusline, it's time to master vim-ctrlspace workflow.
+I am learning it now and it was difficult at first, but after I remembered a few basic operations, it became super useful.
+The saving and loading of workspace work quite well, it's far better than the =:mksession= feature of vim.
+It's worth checking out just to use this feature.
