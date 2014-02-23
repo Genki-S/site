@@ -1,0 +1,66 @@
+#+BLOG: my-blog
+#+POSTID: 52
+#+DATE: [2014-02-23 Sun 10:57]
+#+TITLE: Vim Plugin Settings Made Easy and Beautiful
+#+TAGS: vim
+
+If you use many vim plugins, where to place the plugin settings is one of the most difficult problem.
+In order to be a better vim user, you have to [[http://learnvimscriptthehardway.stevelosh.com/chapters/07.html][make it effortless to edit your =.vimrc= ]].
+The same thing applies for plugin settings.
+In order to edit vim plugin settings as effortlessly as possible, I implemented a system which satisfies these requirements:
+
+- I can start editing plugin settings right away
+- I don't have to make efforts to keep the rules of the system
+
+Here's how.
+
+* Existing Approaches, and Why They Don't Work
+First of all, let's see why existing approaches didn't satisfy my needs.
+I think there are 2 major approaches.
+
+One is to put all plugin settings in =.vimrc= file.
+Even though opening the =.vimrc= might be fast, you have to search where you placed the settings of that particular plugin you want to edit.
+And if you use many plugins, your =.vimrc= becomes huge and I think it's difficult to edit.
+
+Another approach is to [[https://github.com/skwp/dotfiles/tree/master/vim/settings][split files]] and [[https://github.com/skwp/dotfiles/blob/master/vim/settings.vim][source them all]] like [[https://github.com/skwp/dotfiles][YADR]].
+Because it manages settings by files named ={plugin-name}.vim=, you know where the settings of a plugin lies.
+However, by splitting files, it becomes tougher to find and open a file you want to edit.
+And you have to make some efforts to keep the name of plugin setting files consistent.
+
+* Using Plugin Manager
+I thought the second approach was almost satisfying my needs.
+
+If I were able to find setting files more quickly.
+If I didn't have to remember to keep file names consistent.
+
+I noticed that I could satisfy these by completion of plugin names.
+If I can use completion when I open a plugin setting file, I can find it more quickly.
+And I don't have to check correct plugin names when I want to add new setting files.
+
+So, I created this =:EditPluginSetting= command:
+
+#+BEGIN_HTML
+<code data-gist-id='9165361'></code>
+#+END_HTML
+
+When I want to edit plugin settings, I just issue =:EditPluginSetting= command and hit =<Tab>= to let [[https://github.com/Shougo/neobundle.vim][NeoBundle]], the plugin manager, complete plugin names for me.
+For example, when I want to edit a plugin which is related to Ruby on Rails, I can type =:EditPluginSetting rails= and hit =<Tab>=, then the plugins which has "rails" in the name are shown like this:
+
+#+CAPTION: plugin name completion
+[[./images/plugin-name-completion.png]]
+
+If there is one match, it completes the matching plugin name.
+So it is quick to access plugin setting files and I don't have to remember plugin names exactly.
+
+When you hit =<CR>=, it opens ={plugin-name}.vim= file under the directory specified by =s:plugin_setting_dirname=.
+You want the directory be under version control.
+
+By using [[https://github.com/tyru/vim-altercmd][vim-altercmd]], I can issue =ps= command instead of =EditPluginSetting=, and it makes editing plugin settings blazing fast.
+
+* What's Next?
+As I [[http://genkisugimoto.com/blog/how-to-lazy-load-vim-plugins/][wrote before]], vim plugins can be loaded lazily.
+Then, what's the point of loading settings of lazy plugins on vim startup?
+I [[https://github.com/Genki-S/dotfiles/blob/master/vimfiles/vim/neobundle.vim][implemented a method]] to load plugin settings lazily as well as plugins themselves.
+I will cover this in the future.
+
+#+./images/plugin-name-completion.png http://genkisugimoto.com/blog/wp-content/uploads/2014/02/wpid-plugin-name-completion1.png
