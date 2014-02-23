@@ -1,0 +1,4 @@
+name: 歩く時短革命
+markdown: redcarpet
+pygments: true
+permalink: /:title
