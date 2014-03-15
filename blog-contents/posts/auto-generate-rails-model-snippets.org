@@ -1,0 +1,82 @@
+#+BLOG: my-blog
+#+POSTID: 62
+#+DATE: [2014-03-15 Sat 06:48]
+#+TITLE: Automatically Generate Snippet Definitions of Rails Models
+#+TAGS: rails,productivity
+#+PERMALINK: auto-generate-rails-model-snippets
+
+Snippet (a.k.a. text expansion) is a great tool to boost your productivity.
+By using it, you not only type less and write more, but also reduce typos and syntax errors.
+So, you want to use snippets as much as possible.
+
+However, there is one catch.
+You have to write snippet definitions.
+This can be tedious if you have many snippets you want to define.
+
+I recently tried to make snippet definitions of all Rails models.
+Because my project has many models, I could not help automating it.
+Here's how.
+
+* What You Get
+:LOGBOOK:
+CLOCK: [2014-03-15 Sat 05:56]--[2014-03-15 Sat 06:21] =>  0:25
+CLOCK: [2014-03-15 Sat 05:19]--[2014-03-15 Sat 05:44] =>  0:25
+CLOCK: [2014-03-14 Fri 05:27]--[2014-03-14 Fri 05:52] =>  0:25
+:END:
+- A script which generates snippet definitions of Rails models
+
+* Auto Generation. Easy and Consistent.
+The great thing about auto generation is that I don't have to remember snippet triggers individually.
+I need a rule to auto generate, so I just have to remember the rule to use generated snippets.
+This time, I used the following rules:
+
+1. A Rails model is consist of namespaces and a model name (e.g. =NameSpace::RailsModel=)
+2. '::' is replaced with ':' (=NameSpace:RailsModel=)
+3. Collect uppercase letters and ':' (=NS:RM=)
+4. Make them lowercase, and it is the trigger of the snippet for the Rails model (=ns:rm= expands to =NameSpace::RailsModel=)
+5. Add "_" to the trigger, it will be the trigger for the Rails model in snake case (=ns:rm_= expands to =name_space_rails_model=)
+6. Each namespace and model name has it's own snippet definitions (=ns= expands to =NameSpace=, =ns_= to =name_space=, =rm= to =RailsModel=, and =rm_= to =rails_model=)
+7. Optionally, it is possible to set prefix and suffix for snippet triggers to avoid collisions with other snippets (e.g. =ns;= rather than =ns=)
+   
+So, if you know a model's name, you can easily derive the snippet trigger.
+   
+Here is the script I wrote to generate snippet definitions which follow above rule:
+
+#+BEGIN_HTML
+<code data-gist-id='9557643'></code>
+#+END_HTML
+
+You might want to change snippet definition format (I use [[https://github.com/Shougo/neosnippet.vim][neosnippet]]) and run options (I append ';' as suffix).
+Here is how to use it:
+
+#+BEGIN_SRC
+(from Rails root)
+$ rails runner script/snippet_generator.rb > snippets.snip
+#+END_SRC
+
+I tried it for [[http://www.redmine.org/][Redmine]] project, and got following snippet definitions for the model =Repository::Bazaar=:
+#+BEGIN_HTML
+<code data-gist-id='9557672'></code>
+#+END_HTML
+
+Snippet for =Bazaar= is not generated because there is a model with the same trigger =b;= and =b_;= previously.
+
+
+* Where to place snippet definitions
+Now you have snippet definitions, but where you should place it?
+Because those are project specific snippet definitions, you don't want to place those among global snippet definitions.
+If you are using vim, I recommend you to use a plugin which enable you to use project local vimrc (I name it as =.vimrc.local=).
+I am using [[https://github.com/MarcWeber/vim-addon-local-vimrc][vim-addon-local-vimrc]], and load local snippet definitions file from =.vimrc.local= (if you are using neosnippet, it's =:NeoSnippetSource=).
+It looks like this:
+
+#+BEGIN_HTML
+<code data-gist-id='9557764'></code>
+#+END_HTML
+
+If you don't want the snippet definition file to pollute your =git status=, [[http://genkisugimoto.com/blog/keep-clean-git-working-tree/][you can exclude it]].
+
+* What's next?
+I highly recommend you to try community driven snippet definitions ([[https://github.com/honza/vim-snippets][here]] is for vim).
+By using it, you don't have to define common snippets yourself (e.g. snippet for if-then-else statement).
+One catch is that you have to remember the trigger -- but I made it possible to search snippet definitions on the fly.
+I'll cover it in the future post.
