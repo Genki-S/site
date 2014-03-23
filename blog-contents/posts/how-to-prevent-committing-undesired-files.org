@@ -1,0 +1,37 @@
+#+BLOG: my-blog
+#+POSTID: 71
+#+DATE: [2014-03-23 Sun 14:02]
+#+TITLE: How to Prevent Committing Undesired Files
+#+TAGS: git
+#+PERMALINK: how-to-prevent-committing-undesired-files
+
+Bulk staging commands like =git add .= are useful, but it can cause the trouble of staging undesired files.
+One example is adding =*.orig= files which are generated when you use mergetool.
+Recently, [[https://github.com/Genki-S/dotfiles/commit/db920f589c7225a8312927fcf0fe123daf309785][I did it]].
+So I built a system which prevents me from doing it again.
+Here is how.
+
+* What You Get
+- A git pre-commit hook which prevents you from committing files matching certain patterns
+
+* You can just ignore, I prefer to check
+One easy solution would be to add =*.orig= to your =.gitignore=.
+However, I'm sure I would not notice generated =*.orig= files if =git status= does not show them.
+So, I chose to use pre-commit hook so that I can still notice =*.orig= files.
+
+* The Script
+Here is the script to check if =*.orig= files are included in files to be committed:
+
+#+BEGIN_HTML
+<code data-gist-id='9718868'></code>
+#+END_HTML
+
+This script is designed to use with [[https://github.com/icefox/git-hooks][git-hooks]], but you can paste the contents of =run_test= function in your normal =.git/hooks/pre-commit= file as well.
+
+* What's Next?
+To be honest, I am not sure if this script was worth the effort because I have never reaped a benefit from those =*.orig= files.
+I found that [[http://stackoverflow.com/questions/1251681/diff-tool-generates-unwanted-orig-files][it is possible to make mergetool not generate those =*.orig= files]] (=git config --global mergetool.keepBackup false=).
+It might be a better approach because I don't have to =git clean= (or =rm **/*.orig=) after using mergetool.
+
+Anyway, it's great to be able to prevent committing in certain conditions using pre-commit hook.
+For example, it might be used to prevent you from committing files with, say, hard coded breakpoints like =binding.pry= in ruby.
