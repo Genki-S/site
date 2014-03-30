@@ -1,0 +1,44 @@
+#+BLOG: my-blog
+#+POSTID: 74
+#+DATE: [2014-03-31 Mon 07:54]
+#+TITLE: Use imap Wisely to Boost Your Programming Speed
+#+TAGS: vim
+
+In some programming languages, there are some codes which are difficult to type.
+For example, in Ruby, hashrocket (=​=>=) is one of such codes.
+These codes not only make us slow to program, but also interrupts our concentration because we have to use some brain resource just to type these codes.
+Thus, these codes should be made easy to type so that our flows will not be interrupted.
+Here is how I do it.
+
+* Use imap, but Wisely
+=imap= is useful, but it can mess your programming experience if you use it mindlessly.
+I use =<Leader><C-something>= for insert mode mappings so that I don't get unwanted behavior when I just want to input normal texts.
+
+Here is how I make inputting hashrocket easy (in =~/.vim/ftplugin/ruby.vim=):
+
+#+BEGIN_HTML
+<code data-gist-id='9879379'></code>
+#+END_HTML
+
+=<C-l>= stands for 'right', because =​=>= looks like a right arrow.
+By using this, I can input =<Leader><C-l>= instead of =<Space>=><Space>= when I want to input hashrocket.
+
+For C++, I use this similar mappings:
+
+#+BEGIN_HTML
+<code data-gist-id='9879471'></code>
+#+END_HTML
+
+This makes it easy to use streams like =cin >> var= and =cout << var << endl;=.
+
+* What's Next?
+You might prefer to use [[https://github.com/kana/vim-smartchr][vim-smartchr]] rather than =imap=.
+It allows you to change inputs based on how many times you type certain keys in insert mode.
+For example, when you set vim-smartchr as follows, you can hit =​=​= three times in insert mode to get a hashrocket with spaces around it:
+
+#+BEGIN_HTML
+<code data-gist-id='9881232'></code>
+#+END_HTML
+
+I used to use it, but I could not adopt to it well...
+I had to use my brain resource (i.e. think) in order to get the code I wanted.
