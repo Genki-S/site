@@ -1,0 +1,19 @@
+#+BLOG: my-blog
+#+POSTID: 79
+#+DATE: [2014-04-06 Sun 19:29]
+#+TITLE: Command Line Interface for Online Programming Contests
+#+TAGS: programming-contest
+
+Programming contests are fun. However, there are chores which are not fun, like
+
+- copy a sample input and run a program against it
+- compare it with a sample answer
+- submit (copy & paste or select a file)
+
+I've built a tool which automates these chores so that we can enjoy only really fun part of programming contests (which is, thinking and implementing).
+It's a rubygem named "CLI Coder". GitHub page is [[https://github.com/Genki-S/clicoder][here]].
+
+* What's Next?
+For now, 2 online sites named [[http://judge.u-aizu.ac.jp/onlinejudge/][AOJ]] and [[http://atcoder.jp/][AtCoder]] are available. These are famous in Japan, but maybe not for people around the world.
+I made it easy to extend with other sites, so I am planning to expand the sites this tool can deal with.
+Maybe [[http://poj.org/][PKU]], or [[http://www.codechef.com/][CodeChef]]? Let me know if you have requests!
