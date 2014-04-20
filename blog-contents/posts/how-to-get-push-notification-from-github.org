@@ -1,0 +1,73 @@
+#+BLOG: my-blog
+#+POSTID: 83
+#+DATE: [2014-04-20 Sun 11:37]
+#+TITLE: How to Get PUSH Notification from GitHub
+#+TAGS: github,productivity
+
+If you use GitHub for your job or for your hobby, it's likely that sometimes you have to wait other people to review your code or comment on issues.
+One day, I realized myself visiting GitHub every so often so that I can notice reviews as soon as possible.
+I knew this is really bad for my productivity because it meant I was using my brain resources just waiting for other people.
+
+So, I have set up a system which sends push notifications when I get comments on GitHub.
+This system is to my previous GitHub checking habit what [[http://en.wikipedia.org/wiki/Interrupt][Interrupt]] is to [[http://en.wikipedia.org/wiki/Polling_(computer_science)][Polling]] in computer science -- huge improvement in terms of using CPU (my brain) efficiently.
+I will share this system for you.
+
+This post assumes following situations:
+
+- You have a Gmail account
+- You are not getting push notifications for emails (if you are, I must tell you that those are "[[http://lifehacker.com/5895617/you-should-forget-about-push-notifications-for-your-email][killing your focus and destroying your ability to work to your capacity]]")
+- You know what IFTTT is (if not, I highly recommend you to [[http://www.quickanddirtytips.com/tech/web/what-is-ifttt-and-how-can-it-improve-your-digital-life][learn what it is and how it can improve your digital life]])
+
+* GitHub's Notification
+You might be thinking, "don't you know GitHub already provides notification service?"
+I know it, but the problem is that it only provides email notification.
+To be precise, my habit was to check Gmail every so often so that I can notice GitHub notification, which was killing my productivity.
+Email is not the way to get important notifications because other non-important emails might catch your eye and distract you.
+
+So, the goal of the system is to somehow turn GitHub's email notification into push notification.
+
+* IFTTT
+This is where IFTTT comes in.
+Let's create a new recipe which will be triggered by emails from GitHub and send you push notifications.
+The recipe I created is [[https://ifttt.com/myrecipes/personal/9646882][here]] and you can see it as an example (or just use it directly).
+
+** This: Email with Label
+Choose Gmail as a trigger channel, and choose "New email labeled" as a trigger.
+Any label name would work, but make it clear like "github".
+I will explain how to label emails later.
+** That: Notification
+Any notification service would work.
+My choice for now is [[https://www.pushbullet.com/][Pushbullet]].
+I am not a heavy user yet, but I like the simple interface and it is doing its job so far on my Firefox and iPod touch.
+After you choose your notification service, create push content using Gmail's ingredients like "Subject" and "BodyPlain".
+
+* Label Emails from GitHub
+Now you should be able to get notification whenever an email is labeled "github".
+So, the last step is to label GitHub notification emails.
+
+** Change GitHub's Notification Address
+Gmail offers a pretty awesome trick that you can [[http://gmailblog.blogspot.jp/2008/03/2-hidden-ways-to-get-more-from-your.html][append "+" and any text after your email address' local part]].
+If your address is "mail@gmail.com", you can use addresses like "mail+friends@gmail.com" or "mail+family@gmail.com", and as you guessed, "mail+github@gmail.com" too.
+So, let's make GitHub send notifications to your "mail+github@gmail.com" address.
+
+1. Add another email address ("mail+github@gmail.com"): https://github.com/settings/emails
+2. Choose that as the notification email address: https://github.com/settings/notifications
+** Create a Filter
+Now, let's assign the "github" label to all emails sent to "mail+github@gmail.com" address.
+
+1. Visit https://mail.google.com/mail/u/0/#settings/filters
+2. Click "Create a new filter"
+3. Input "mail+github@gmail.com" to "To" field
+4. Click "Create filter with this search"
+5. In "Apply the label" section, choose "github" (you can create new label here. Be sure to choose the same name you used in your IFTTT recipe)
+6. Click "Create filter"
+* All Set
+OK, you are all set and now you can forget about waiting for code reviews or comments and do other productive things until push notifications come.
+But before that, I recommend you to test your system by sending an email to "mail+github@gmail.com" yourself.
+The mail should be labeled as "github" and push notification should be sent to you.
+(In my case, it took 2 to 3 minutes to get a push after sending an email myself, so don't worry if your push does not come instantly.)
+* What's Next?
+This technique can be applied to any situations.
+For example, you can get notifications for emails from your family by having them send emails to "mail+family@gmail.com" rather than "mail@gmail.com" (don't forget to create another IFTTT recipe and another Gmail filter).
+Push notification can help you free up your brain resources like this, or hurt your productivity by distracting you all the time.
+So, push wisely.
