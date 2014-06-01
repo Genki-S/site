@@ -1,0 +1,42 @@
+#+BLOG: my-blog
+#+POSTID: 88
+#+DATE: [2014-06-01 Sun 15:40]
+#+TITLE: How to Jump into Tmux Session Automatically
+#+TAGS: shell,tmux,productivity
+
+[[http://tmux.sourceforge.net/][Tmux]] is a very powerful tool to boost your productivity.
+It became one of my most important tools shortly after I start using it.
+I can't imagine how I was working when I didn't know about tmux.
+
+Previously, I was using iTerm's "Send text at start" feature to invoke tmux session automatically.
+However, one day, when I was playing with my Linux machine, I noticed I was not in tmux session when I tried to scroll up and see what was the output of the previous command.
+This really irritated me and I thought I had to do something about it.
+Today, I'll share what I did so that I can always be in tmux session.
+
+* The Right Place to Start Tmux Session: ~/.zshrc
+Fortunately, tmux is highly scriptable.
+This makes it possible to automate many aspects of tmux controls by writing some scripts.
+
+First of all, we want to know if we are already in tmux session so that we don't try to jump into a session if we are already in one.
+This can be done easily by checking =$TMUX= environment variable, which tmux defines in tmux sessions.
+
+If we find we are not in a tmux session, we try to jump into one.
+Let's create new session with =tmux new-session= command.
+
+By implementing these steps, whole script looks like this:
+
+#+BEGIN_HTML
+<code data-gist-id='94cf8c9868f9bb95c923'></code>
+#+END_HTML
+
+Place it in the beginning of your =~/.zshrc= or =~/.bashrc= and you will have stronger relationship with tmux.
+If you want to use your shell outside of tmux frequently, remove =exit= command.
+This makes it possible to quit tmux session and continue using shell outside of tmux.
+
+* What's Next?
+This idea came from the book "[[http://pragprog.com/book/bhtmux/tmux][tmux: Productive Mouse-Free Development]]".
+Before reading this book, I was thinking tmux is just a multiplexer.
+However, after reading this, I realized that the power of tmux lies in it's scriptability and I came up with many ideas to improve my workflow.
+So, I suggest you to read it if you haven't read it yet.
+It's a quick read with 88 pages.
+ 
