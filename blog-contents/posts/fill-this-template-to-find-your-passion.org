@@ -1,0 +1,56 @@
+#+BLOG: my-blog
+#+POSTID: 94
+#+DATE: [2014-06-08 Sun 18:18]
+#+TITLE: Fill This Template to Find Your Passion
+#+TAGS: lifehack
+
+Finding passion is one of the most important and the most difficult things in our lives.
+I've been struggling for a long time trying to find out where my passion lies.
+Recently, because my job hunting is starting, I'm really into thinking about it.
+
+Today, I want to share you 1 tool to help you find your passion.
+However, I think there is no silver bullet to find our passion, and we have to think from many aspects.
+I just hope this tool helps you take a step forward in the journey of your self discovery.
+
+* tl;dr
+For busy guys, here's the thing:
+
+"In my ideal world, ..."
+
+* Why Template?
+Templates are good because it's immediately actionable.
+One of my favorite is the [[http://www.mountaingoatsoftware.com/blog/advantages-of-the-as-a-user-i-want-user-story-template][user story template]] ("As a <type of user>, I want <some goal> so that <some reason>").
+Filling this out gives me a great first momentum of starting user-centered service designing.
+
+There are many articles on the Internet (e.g. "N Ways to Find Your Passion") trying to help us find our passion.
+However, I think most of those ideas are too abstract and rarely immediately actionable.
+So, I came up with a template which I can fill out right away.
+
+* The Template for Finding your Passion
+Here's the template:
+
+"In my ideal world, ..."
+
+By finishing this sentence, you will get a vague idea what you want to do with your life.
+Because your ideal world is, well, your ideal world, you are most likely to be passionate to actualize such a world.
+
+A good thing about this template is that this doesn't limit anything about your idea.
+So you can be virtuous like "In my ideal world, there is no child suffering from starvation", or you can be selfish like "In my ideal world, I'm the richest person in the world."
+Try out some variations and find the most strong sentence that hits your heart.
+
+* Examples
+I've tried it myself and came up with following sentences:
+
+- In my ideal world, I'm super productive and I can do anything better than any man.
+- In my ideal world, I'm improving myself constantly at the speed of light.
+- In my ideal world, people are doing only creative things and not any barbaric stuffs (like tax).
+- In my ideal world, people are doing what they love 100% of their time.
+
+I got fond of the last one because the reason I'm into productivity stuffs is to use more time to do what I love.
+And I found I was happy when I saved other people's time and made them focus on what they truly wanted to do.
+So, it might be a good decision for me to devote my life to actualize the world where people can do what they love 100% of their time.
+
+* What's Next?
+To be honest, I'm not sure.
+I'm not planning to stop thinking here, so I will continue revising this sentence and thinking with other methods.
+If you are confident that you have firm, unchangeable value in you, I suggest you to write a "personal mission statement", which is introduced in the infamous book "[[http://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/1451639619/][The 7 Habits of Highly Effective People]]".
