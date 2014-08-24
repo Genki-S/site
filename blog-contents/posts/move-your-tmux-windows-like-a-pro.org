@@ -1,0 +1,48 @@
+#+BLOG: my-blog
+#+POSTID: 100
+#+DATE: [2014-08-24 Sun 19:57]
+#+BLOG: my-blog
+#+TITLE: Move Your Tmux Windows like a Pro
+#+TAGS: tmux,productivity
+
+[[http://tmux.sourceforge.net/][tmux]] is a great tool for us programmers. However, there are some frustrations about it.
+One of them is its inability to move windows intuitively. In this post, I'm going to give you a script and key bindings which enable you to move tmux windows around like a pro.
+
+* How you move windows
+Without any scripting, you can move windows using tmux's =tmux swap-window= command. It takes =-s= (source) and =-t= (target) options, and (you guessed it) swap them. So for example, if you want to swap windows 2 and 5, you type:
+
+#+begin_src sh
+$ tmux swap-window -s :2 -t :5
+#+end_src
+
+This is a little fingerful. And I generally don't "swap" windows, I just move it (think about when you move tabs on your web browser). So, while above commands make window arrangement from "1 2 3 4 5" to "1 5 3 4 2", what I really want is "1 3 4 5 2", like when I moved 2nd tab to the right of 5th tab in my web browser.
+
+* Solution -- script
+Fortunately, tmux is highly scriptable. So with a little effort, you can get the behavior you want. For the purpose of moving windows, I wrote the script below:
+
+#+BEGIN_HTML
+<code data-gist-id='488b3d38cd93f88e3525'></code>
+#+END_HTML
+
+What it does is to just swap adjacent windows, considering wrapping. So, if you want to move current window to right, (assuming you have the script in your PATH) you can type:
+
+#+begin_src sh
+$ tmux-win-move right
+#+end_src
+
+On 2nd window of "1 2 3 4 5" arrangement, by repeating this command 3 times, you can get desired "1 3 4 5 2" arrangement. However, repeating such a command is tedious. This is where key binding comes in.
+
+* Solution -- key binding
+If you are a vim user, I recommend you to put the following bindings in your =~/.tmux.conf=:
+
+#+begin_src sh
+bind-key -r H run-shell 'tmux-win-move left'
+bind-key -r L run-shell 'tmux-win-move right'
+#+end_src
+
+=-r= option makes the key binding repeatable, meaning that you can repeat above command by (if your prefix is C-b) =C-b L L L= if you type it fast enough.
+
+So, with above script and key bindings, you can move your tmux windows like a pro. After using it myself for a while, I'm pretty fond of it. It feels like the same as moving tabs on web browsers, so I know intuitively what the arrangement will look like after I move a window.
+
+* What's next?
+Now that you can move tmux windows as you like, you have no reason to be afraid of having many windows. In order to make it easy to generate many windows, I recommend [[https://github.com/tmuxinator/tmuxinator][tmuxinator gem]]. It makes development setup (e.g. =mysqld start=, =rails server= etc.) a snap.
